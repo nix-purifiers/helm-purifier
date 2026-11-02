@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+# SPDX-License-Identifier: MIT
+set -eu
+exec nix run "$HELM_PLUGIN_DIR" -- "$@"

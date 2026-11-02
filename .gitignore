@@ -1,0 +1,8 @@
+/result*
+.helm-purifier
+__pycache__/
+*.pyc
+charts
+.pages-source
+.pages-site
+.pages-theme

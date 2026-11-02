@@ -1,0 +1,6 @@
+dependencies:
+- name: podinfo
+  repository: oci://ghcr.io/stefanprodan/charts
+  version: 6.9.2
+digest: sha256:00016ea277abe01f89873f4b711d282aa04e65068a4d373571e6aa3f306121a7
+generated: "2026-11-01T19:12:32.582701892-08:00"

@@ -1,0 +1,7 @@
+apiVersion: v2
+name: oci-purified
+version: 0.1.0
+dependencies:
+  - name: podinfo
+    version: 6.9.2
+    repository: oci://ghcr.io/stefanprodan/charts

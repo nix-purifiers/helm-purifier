@@ -1,0 +1,14 @@
+{
+  "artifacts": {
+    "prometheus-node-exporter-4.60.1": {
+      "hash": "sha256-ACevwhtIsysgVqeWZIshaNOsB/PwhdgzbV7CopBFb4Y=",
+      "url": "https://github.com/prometheus-community/helm-charts/releases/download/prometheus-node-exporter-4.60.1/prometheus-node-exporter-4.60.1.tgz"
+    }
+  },
+  "contentHash": "7976a051ee42f6cf25e86152db48c38b48defa29287c1609aa28a4feca0c5f72",
+  "inputs": {
+    "Chart.lock": "86d95d186719379bc4eed3e3682a882a3894447cd866e4b6ace6d19f4a35bcab",
+    "Chart.yaml": "d381bcf4b25e9179b30298171078d8a907eed04fc99c5fef6eb851772152b9a7"
+  },
+  "version": 1
+}

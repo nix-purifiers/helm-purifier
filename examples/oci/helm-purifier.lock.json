@@ -1,0 +1,14 @@
+{
+  "artifacts": {
+    "podinfo-6.9.2": {
+      "hash": "sha256-jqyrQ2XZF4Z+hVv7Rymv2/8ovq0/2dwBkjq1CyaqQ4A=",
+      "url": "oci+https://ghcr.io/v2/stefanprodan/charts/podinfo/blobs/sha256:8eacab4365d917867e855bfb4729afdbff28bead3fd9dc01923ab50b26aa4380"
+    }
+  },
+  "contentHash": "b11f71bfb8bd9ca87ecd63267ce1c425243b8d24c1fda63732aafb47972546f9",
+  "inputs": {
+    "Chart.lock": "da5282370a3e59acc92e0d2796bc4c4399a6525a1d8365f8dd0a61efd717e3c6",
+    "Chart.yaml": "91729404ba6506fb14ca904f34f2ac3b85160a6bfead3a67f32887481e16408d"
+  },
+  "version": 1
+}
