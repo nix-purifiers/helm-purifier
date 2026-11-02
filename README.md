@@ -203,9 +203,3 @@ not deploy anything to a Kubernetes cluster.
 
 The purifier idea was inspired by nixcloud's
 [cargo (libnix)](https://github.com/nixcloud/cargo).
-
-[Helm](https://helm.sh/),
-[Helm Language Server](https://github.com/mrjosh/helm-ls),
-[Prometheus community charts](https://github.com/prometheus-community/helm-charts),
-and [Podinfo](https://github.com/stefanprodan/podinfo).
-Fetches use the shared [purifier library](https://github.com/nix-purifiers/purifier).
