@@ -201,6 +201,9 @@ not deploy anything to a Kubernetes cluster.
 
 ## Credits
 
+The purifier idea was inspired by nixcloud's
+[cargo (libnix)](https://github.com/nixcloud/cargo).
+
 [Helm](https://helm.sh/),
 [Helm Language Server](https://github.com/mrjosh/helm-ls),
 [Prometheus community charts](https://github.com/prometheus-community/helm-charts),
