@@ -33,6 +33,11 @@ class OciTests(unittest.TestCase):
         redirect = oci.SafeRedirect().redirect_request(request, None, 302, '', {}, 'https://storage.example/blob')
         self.assertIsNone(redirect.get_header('Authorization'))
 
+    def test_redirect_cannot_downgrade_tls(self):
+        request = urllib.request.Request('https://registry.example/blob')
+        with self.assertRaisesRegex(ValueError, 'HTTPS-to-HTTP'):
+            oci.SafeRedirect().redirect_request(request, None, 302, '', {}, 'http://registry.example/blob')
+
     def test_manifest_locks_blob_digest_not_tag(self):
         payload = {'layers': [{'mediaType': 'application/vnd.cncf.helm.chart.content.v1.tar+gzip', 'digest': 'sha256:' + 'a'*64}]}
         with patch.object(oci, 'request', return_value=io.BytesIO(json.dumps(payload).encode())):

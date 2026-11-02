@@ -29,13 +29,15 @@ For an existing Helm installation, the same commands are available as a
 native plugin:
 
 ```sh
-helm plugin install \
+helm plugin install --verify=false \
   https://github.com/nix-purifiers/helm-purifier
 helm purifier lock
 helm purifier prefetch
 helm template development .
 ```
 
+Helm 4 requires `--verify=false` for Git-source plugins; artifact signature
+verification is unavailable for that plugin format.
 The plugin uses its installed source and pinned Nix inputs. Nix must be
 available. No separate Helm package registry is required to install it.
 

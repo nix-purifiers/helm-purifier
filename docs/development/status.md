@@ -32,5 +32,8 @@ equality and both-architecture evaluation passed. The OCI fixture skips
 upstream test hooks explicitly, since Podinfo generates random test pod
 names; its packaged release retains those original test templates.
 
-Pending: both-architecture CI, publication and remote native-plugin
-installation verification.
+Published at nix-purifiers/helm-purifier. Initial CI 41383071937 passed
+on x86_64-linux and aarch64-linux; Pages 41383071969 passed. Native remote
+plugin installation and `helm purifier --help` were verified. Helm 4
+requires --verify=false for this Git-source plugin format; README corrected
+after testing the actual remote installation.

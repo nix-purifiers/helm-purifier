@@ -11,8 +11,12 @@ from pathlib import Path
 
 class SafeRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, request, fp, code, msg, headers, newurl):
+        original = urllib.parse.urlsplit(request.full_url)
+        target = urllib.parse.urlsplit(newurl)
+        if original.scheme == 'https' and target.scheme != 'https':
+            raise ValueError('refusing an HTTPS-to-HTTP registry redirect')
         redirected = super().redirect_request(request, fp, code, msg, headers, newurl)
-        if redirected is not None and urllib.parse.urlsplit(request.full_url).netloc != urllib.parse.urlsplit(newurl).netloc:
+        if redirected is not None and (original.scheme, original.netloc) != (target.scheme, target.netloc):
             redirected.remove_header('Authorization')
         return redirected
 
