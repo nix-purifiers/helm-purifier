@@ -199,6 +199,20 @@ helm-purifier publish \
 This uses Helm's normal registry credentials. Rendering and packaging do
 not deploy anything to a Kubernetes cluster.
 
+## Values from Nix producers
+
+`buildHelmProject { valuesDependencies = [ producer ]; ...; }` accepts
+packages exposing `projections.json.files.default`, such as evaluated CUE
+and Jsonnet outputs. Helm receives these files through native `--values`
+arguments before explicit `valuesFiles`, so explicit values retain the usual
+override precedence. Unsupported projections fail clearly. Supplied data is
+a Nix input and does not add downloads to the chart lock.
+
+This interface affects rendering and linting, like `valuesFiles`; it does not
+rewrite the source chart's packaged defaults in `release`. An ordinary Helm
+consumer of the published chart must pass the projected file through
+`--values` too. No deployment or cluster access is performed.
+
 ## Credits
 
 The purifier idea was inspired by nixcloud's
