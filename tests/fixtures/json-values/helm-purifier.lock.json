@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "inputs": {
+    "Chart.yaml": "5dda1933e832f69cf6976c081c160be7500c1bae24fc8a00ec8f9406e2b51e71",
+    "Chart.lock": "125de039017b0a22e6404a1401bdbed48827109d766aad3b24470a5dd748869a"
+  },
+  "artifacts": {},
+  "contentHash": "b44d0f36a632a602519d45ca3d4fd3f6461b39962dc4e261cd7965afecdbe273"
+}
