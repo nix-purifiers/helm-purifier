@@ -6,22 +6,7 @@
 }:
 let
   src = ./fixtures/json-values;
-  body = {
-    version = 1;
-    inputs = {
-      "Chart.yaml" = builtins.hashFile "sha256" (src + "/Chart.yaml");
-      "Chart.lock" = builtins.hashFile "sha256" (src + "/Chart.lock");
-    };
-    artifacts = { };
-  };
-  lockFile = pkgs.writeText "helm-purifier.lock.json" (
-    builtins.toJSON (
-      body
-      // {
-        contentHash = builtins.hashString "sha256" (builtins.toJSON body);
-      }
-    )
-  );
+  lockFile = ./fixtures/json-values/helm-purifier.lock.json;
   source = pkgs.writeTextDir "values.json" ''{"answer":42}'';
   values = source // {
     projections = purifier.dataProjections {
