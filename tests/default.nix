@@ -49,6 +49,10 @@ let
   };
 in
 {
+  json-values = import ./json-values.nix {
+    inherit pkgs purifier;
+    inherit (pkgs.helm-purifier) buildHelmProject;
+  };
   unit =
     assert import ./parser.nix { inherit (pkgs) lib; };
     pkgs.runCommand "helm-purifier-unit" { nativeBuildInputs = [ python ]; } ''

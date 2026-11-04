@@ -15,6 +15,9 @@
   fetchers ? { },
   releaseName ? "purified",
   valuesFiles ? [ ],
+  # Evaluated JSON values from other Nix producers. Each supplied package
+  # exports one default document through projections.json.files.default.
+  valuesDependencies ? [ ],
   kubeVersion ? null,
   skipTests ? false,
   srcFilter ?
@@ -29,6 +32,17 @@
     ]),
 }:
 let
+  selectedValues = purifier.projectInputs {
+    dependencies = valuesDependencies;
+    formats = [ "json" ];
+  };
+  projectedValues = map (
+    input:
+    if input.repository ? files.default then
+      input.repository.files.default
+    else
+      throw "helm-purifier: a values dependency must expose projections.json.files.default"
+  ) selectedValues;
   lock = purifier.checkLock (
     (import ./read-lock.nix { inherit lib; }) { inherit src lockFile chartLock; }
   );
@@ -55,7 +69,7 @@ let
     lib.concatMap (file: [
       "--values"
       file
-    ]) valuesFiles
+    ]) (projectedValues ++ valuesFiles)
     ++ lib.optionals (kubeVersion != null) [
       "--kube-version"
       kubeVersion
