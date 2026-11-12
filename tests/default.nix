@@ -10,7 +10,9 @@ let
   };
   lock = self.lib.helm-purifier.readLock { src = fixture; };
   purifier = import (self.inputs.purifier + "/nix/lib") { inherit (pkgs) lib; };
-  charts = pkgs.helm-purifier.callPackage ../nix/charts.nix { inherit purifier; } { inherit lock; };
+  charts = pkgs.helm-purifier.callPackage ../pkgs/build-helm-project/charts.nix {
+    inherit purifier;
+  } { inherit lock; };
   mkErrorCheck =
     case:
     pkgs.runCommand "helm-conformance-${case}"

@@ -28,6 +28,6 @@ else
       export SSL_CERT_FILE=${cacert}/etc/ssl/certs/ca-bundle.crt
       if [ -f "''${NIX_SSL_CERT_FILE:-}" ]; then export SSL_CERT_FILE="$NIX_SSL_CERT_FILE"; fi
       export NIX_SSL_CERT_FILE="$SSL_CERT_FILE"
-      python ${../helm_purifier/oci.py} ${lib.escapeShellArg url} "$out"
+      python ${../../helm_purifier/oci.py} ${lib.escapeShellArg url} "$out"
     '';
   }

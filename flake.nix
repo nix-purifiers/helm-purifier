@@ -21,12 +21,14 @@
       shared = lib: import (purifier + "/nix/lib") { inherit lib; };
       overlay = final: prev: {
         helm-purifier = final.lib.makeScope final.newScope (scope: {
-          cli = scope.callPackage ./nix/cli.nix {
+          cli = scope.callPackage ./pkgs/cli/default.nix {
             nixpkgsSrc = nixpkgs;
             purifierSrc = purifier;
           };
-          fetchChart = scope.callPackage ./nix/fetch-chart.nix { };
-          buildHelmProject = scope.callPackage ./nix/build-project.nix { purifier = shared final.lib; };
+          fetchChart = scope.callPackage ./pkgs/build-helm-project/fetch-chart.nix { };
+          buildHelmProject = scope.callPackage ./pkgs/build-helm-project/default.nix {
+            purifier = shared final.lib;
+          };
         });
       };
       pkgsFor =
@@ -38,7 +40,7 @@
     in
     {
       overlays.default = overlay;
-      lib.helm-purifier.readLock = import ./nix/read-lock.nix { lib = nixpkgs.lib; };
+      lib.helm-purifier = (nixpkgs.lib.extend (import ./lib-overlays/default)).helm-purifier;
       packages = forAll (system: {
         default = (pkgsFor system).helm-purifier.cli;
         cli = self.packages.${system}.default;
