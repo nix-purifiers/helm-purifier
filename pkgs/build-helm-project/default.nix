@@ -44,7 +44,9 @@ let
       throw "helm-purifier: a values dependency must expose projections.json.files.default"
   ) selectedValues;
   lock = purifier.checkLock (
-    (import ./read-lock.nix { inherit lib; }) { inherit src lockFile chartLock; }
+    (import ../../lib-overlays/default/read-lock.nix { inherit lib; }) {
+      inherit src lockFile chartLock;
+    }
   );
   charts = (import ./charts.nix { inherit runCommand fetchChart purifier; }) {
     inherit lock fetchers;

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 { lib }:
 let
-  parse = import ../nix/chart-lock.nix { inherit lib; };
+  parse = import ../lib-overlays/default/chart-lock.nix { inherit lib; };
   source = builtins.toFile "Chart.lock" ''
     dependencies:
     - name: "example"

@@ -18,14 +18,14 @@ in
 stdenvNoCC.mkDerivation {
   pname = "helm-purifier";
   version = "0.1.0";
-  src = ../.;
+  src = ../..;
   nativeBuildInputs = [ makeWrapper ];
   dontBuild = true;
   installPhase = ''
     mkdir -p "$out/bin" "$out/lib/helm-purifier"
-    cp -r helm_purifier nix "$out/lib/helm-purifier/"
+    cp -r helm_purifier pkgs lib-overlays "$out/lib/helm-purifier/"
     install -m755 bin/helm-purifier "$out/bin/helm-purifier"
-    substituteInPlace "$out/lib/helm-purifier/nix/realize.nix" \
+    substituteInPlace "$out/lib/helm-purifier/pkgs/build-helm-project/realize.nix" \
       --replace-fail '@nixpkgs@' '${nixpkgsSrc}' \
       --replace-fail '@purifier@' '${purifierSrc}' \
       --replace-fail '@runtime@' "$out"
@@ -41,7 +41,7 @@ stdenvNoCC.mkDerivation {
       } \
       --prefix PYTHONPATH : "$out/lib/helm-purifier" \
       --set HELM_PURIFIER_HELM ${kubernetes-helm}/bin/helm \
-      --set HELM_PURIFIER_REALIZE "$out/lib/helm-purifier/nix/realize.nix" \
+      --set HELM_PURIFIER_REALIZE "$out/lib/helm-purifier/pkgs/build-helm-project/realize.nix" \
       --set-default SSL_CERT_FILE ${cacert}/etc/ssl/certs/ca-bundle.crt
     ln -s ${kubernetes-helm}/bin/helm "$out/bin/helm"
     makeWrapper ${helm-ls}/bin/helm_ls "$out/bin/helm_ls" --prefix PATH : ${
